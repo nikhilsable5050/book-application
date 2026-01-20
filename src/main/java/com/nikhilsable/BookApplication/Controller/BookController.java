@@ -22,4 +22,22 @@ public class BookController {
         Book savedBook = bookService.addBook(book);
         return ResponseEntity.ok(savedBook);
     }
+
+    @GetMapping("/getBook/{bookName}")
+    public ResponseEntity<Book> getBookByName(@PathVariable("bookName") String name){
+        final Book bookByName = bookService.getBookByName(name);
+        return ResponseEntity.ok(bookByName);
+    }
+
+    @PutMapping("/updateBook")
+    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
+        Book updateBook = bookService.updateBook(book);
+        return ResponseEntity.ok(updateBook);
+    }
+
+    @DeleteMapping("/deleteBook/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable("id") Integer id) {
+        bookService.deleteBook(id);
+        return ResponseEntity.ok().build();
+    }
 }
