@@ -1,5 +1,3 @@
-# book-application
-Spring Boot REST API for managing books with CRUD operations.
 
 # 📚 Book Management System – Spring Boot CRUD API
 
@@ -41,18 +39,30 @@ This project is built to understand:
 
 BookApplication
 │
+
 ├── Controller
+
 │ └── BookController.java
+
 │
+
 ├── Service
+
 │ └── BookService.java
+
 │
 ├── Repository
+
 │ └── BookRepository.java
+
 │
+
 ├── Entity
+
 │ └── Book.java
+
 │
+
 └── BookApplication.java
 
 yaml
