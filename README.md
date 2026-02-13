@@ -1,77 +1,130 @@
+📚 Book Management System – Full Stack CRUD App
 
-# 📚 Book Management System – Spring Boot CRUD API
+A full-stack Book Management System built using Spring Boot and React that performs complete CRUD (Create, Read, Update, Delete) operations on books.
 
-A simple and clean **Spring Boot REST API** that performs full **CRUD (Create, Read, Update, Delete)** operations on books.
+This project demonstrates:
 
-This project is built to understand:
-- RESTful API design
-- Spring Boot layered architecture
-- Controller, Service, Repository flow
-- Proper HTTP methods and responses
+RESTful API design
 
----
+Spring Boot layered architecture
 
-## 🚀 Features
+Full-stack integration (React + Spring Boot)
 
-- ➕ Add a new book  
-- 🔍 Get a book by title  
-- ✏️ Update existing book details  
-- ❌ Delete a book by ID  
-- 📦 RESTful API design  
-- 🧱 Layered architecture (Controller → Service → Repository)
+Controller → Service → Repository flow
 
----
+Proper HTTP methods & responses
 
-## 🛠️ Tech Stack
+🚀 Features
 
-- **Java**
-- **Spring Boot**
-- **Spring Web**
-- **Spring Data JPA**
-- **Hibernate**
-- **MySQL**
-- **Maven**
-- **Postman** (for testing)
+➕ Add a new book
 
----
+📚 View all books
 
-## 📂 Project Structure
+🔍 Search books
 
-BookApplication
+✏️ Update existing books
+
+❌ Delete books
+
+🌙 Dark themed dashboard UI
+
+📦 RESTful API design
+
+🧱 Layered backend architecture
+
+🛠️ Tech Stack
+Backend
+
+Java
+
+Spring Boot
+
+Spring Web
+
+Spring Data JPA
+
+Hibernate
+
+MySQL
+
+Maven
+
+Frontend
+
+React
+
+Axios
+
+CSS Dashboard UI
+
+Tools
+
+Postman
+
+Git & GitHub
+
+VS Code / IntelliJ
+
+📂 Project Structure
+book-application
 │
-
-├── Controller
-
-│ └── BookController.java
-
+├── backend        → Spring Boot API
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   └── resources
 │
+└── frontend       → React UI
+    ├── src
+    └── public
 
-├── Service
+⚙️ How to Run the Project
+1️⃣ Clone Repository
+git clone https://github.com/nikhilsable5050/book-application.git
 
-│ └── BookService.java
+2️⃣ Run Backend
 
-│
-├── Repository
+Open backend folder in IntelliJ:
 
-│ └── BookRepository.java
+backend/
 
-│
 
-├── Entity
+Run:
 
-│ └── Book.java
+BookApplication.java
 
-│
 
-└── BookApplication.java
+Backend runs on:
 
-yaml
-Copy code
+http://localhost:8080
 
----
+3️⃣ Run Frontend
 
-## ⚙️ How to Run the Project
+Open frontend folder in VS Code:
 
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/your-username/book-application.git
+frontend/
+
+
+Run:
+
+npm install
+npm start
+
+
+Frontend runs on:
+
+http://localhost:3000
+
+📡 API Endpoints
+Method	Endpoint	Description
+POST	/book/v1/addBook	Add book
+GET	/book/v1/books	Get all books
+GET	/book/v1/getBook/{title}	Get book
+PUT	/book/v1/updateBook	Update book
+DELETE	/book/v1/deleteBook/{id}	Delete book
+
+
+👨‍💻 Author
+
+Nikhil Sable
