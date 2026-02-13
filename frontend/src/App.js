@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
+  const [search, setSearch] = useState("");
 
   const API = "http://localhost:8080/book/v1";
 
@@ -13,9 +16,18 @@ function App() {
     fetchBooks();
   }, []);
 
+  useEffect(() => {
+    setFilteredBooks(
+      books.filter((b) =>
+        b.title.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search, books]);
+
   const fetchBooks = async () => {
     const res = await axios.get(`${API}/books`);
     setBooks(res.data);
+    setFilteredBooks(res.data);
   };
 
   const addBook = async () => {
@@ -40,10 +52,21 @@ function App() {
   };
 
   return (
-    <div style={{ padding: 30, maxWidth: 600, margin: "auto" }}>
-      <h2>📚 Book Manager</h2>
+    <div className="container">
+      <h2 className="title">📚 Book Dashboard</h2>
 
-      <div style={{ marginBottom: 20 }}>
+      <div className="stats">
+        Total Books: {books.length}
+      </div>
+
+      <input
+        className="search"
+        placeholder="Search book..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <div className="form">
         <input
           placeholder="Title"
           value={title}
@@ -53,35 +76,34 @@ function App() {
           placeholder="Author"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          style={{ marginLeft: 10 }}
         />
         <input
           placeholder="Genre"
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
-          style={{ marginLeft: 10 }}
         />
 
-        <button onClick={addBook} style={{ marginLeft: 10 }}>
+        <button className="add-btn" onClick={addBook}>
           Add Book
         </button>
       </div>
 
-      <h3>Book List</h3>
+      <div className="book-list">
+        {filteredBooks.map((book) => (
+          <div key={book.id} className="book-item">
+            <span>
+              <b>{book.title}</b> — {book.author} ({book.genre})
+            </span>
 
-      <ul>
-        {books.map((book) => (
-          <li key={book.id} style={{ marginBottom: 8 }}>
-            <b>{book.title}</b> — {book.author} ({book.genre})
             <button
+              className="delete-btn"
               onClick={() => deleteBook(book.id)}
-              style={{ marginLeft: 10 }}
             >
               Delete
             </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
