@@ -3,11 +3,16 @@
 A full-stack Book Management System built with Spring Boot and React, providing complete CRUD operations for managing books through a modern dashboard UI.
 
 🚀 Features
--Add, update, and delete books
--View and search books
--RESTful API architecture
--Modern dark-themed dashboard UI
--Full-stack integration (React + Spring Boot + MySQL)
+
+Add, update, and delete books
+
+View and search books
+
+RESTful API architecture
+
+Modern dark-themed dashboard UI
+
+Full-stack integration (React + Spring Boot + MySQL)
 
 🛠 Tech Stack
 
