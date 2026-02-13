@@ -29,7 +29,7 @@ This project is built to understand:
 - **Spring Web**
 - **Spring Data JPA**
 - **Hibernate**
-- **H2 / MySQL** (any DB supported)
+- **MySQL**
 - **Maven**
 - **Postman** (for testing)
 
