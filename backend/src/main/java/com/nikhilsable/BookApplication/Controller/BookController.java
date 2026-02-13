@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/book/v1")
+@CrossOrigin(origins = "http://localhost:3000")   // ✅ Allow React
 public class BookController {
 
     private final BookService bookService;
@@ -19,20 +22,22 @@ public class BookController {
 
     @PostMapping("/addBook")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book savedBook = bookService.addBook(book);
-        return ResponseEntity.ok(savedBook);
+        return ResponseEntity.ok(bookService.addBook(book));
+    }
+
+    @GetMapping("/books")   // ✅ Needed for frontend list
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
     }
 
     @GetMapping("/getBook/{bookName}")
-    public ResponseEntity<Book> getBookByName(@PathVariable("bookName") String name){
-        final Book bookByName = bookService.getBookByName(name);
-        return ResponseEntity.ok(bookByName);
+    public ResponseEntity<Book> getBookByName(@PathVariable String bookName){
+        return ResponseEntity.ok(bookService.getBookByName(bookName));
     }
 
     @PutMapping("/updateBook")
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-        Book updateBook = bookService.updateBook(book);
-        return ResponseEntity.ok(updateBook);
+        return ResponseEntity.ok(bookService.updateBook(book));
     }
 
     @DeleteMapping("/deleteBook/{id}")
@@ -40,5 +45,4 @@ public class BookController {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }
-
 }
