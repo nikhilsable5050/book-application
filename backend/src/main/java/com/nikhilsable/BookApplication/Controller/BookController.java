@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book/v1")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${frontend.url}")
 public class BookController {
 
     private final BookService bookService;
@@ -20,40 +20,33 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // Add book
     @PostMapping("/addBook")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         return ResponseEntity.ok(bookService.addBook(book));
     }
 
-    // Get all books
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getAllBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    // Get book by title
     @GetMapping("/getBook/{bookName}")
     public ResponseEntity<Book> getBookByName(@PathVariable String bookName){
         return ResponseEntity.ok(bookService.getBookByName(bookName));
     }
 
-    // Full update (PUT)
     @PutMapping("/updateBook")
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
         return ResponseEntity.ok(bookService.updateBook(book));
     }
 
-    // Partial update (PATCH)
     @PatchMapping("/updateBook/{id}")
     public ResponseEntity<Book> patchBook(
             @PathVariable Integer id,
             @RequestBody Book book) {
-
         return ResponseEntity.ok(bookService.patchBook(id, book));
     }
 
-    // Delete book
     @DeleteMapping("/deleteBook/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
