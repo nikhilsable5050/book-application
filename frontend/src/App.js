@@ -9,6 +9,7 @@ function App() {
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
   const [search, setSearch] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
   const API = "http://localhost:8080/book/v1";
 
@@ -39,16 +40,38 @@ function App() {
       genre,
     });
 
-    setTitle("");
-    setAuthor("");
-    setGenre("");
-
+    clearForm();
     fetchBooks();
+  };
+
+  const updateBook = async () => {
+    await axios.patch(`${API}/updateBook/${editingId}`, {
+      title,
+      author,
+      genre,
+    });
+
+    clearForm();
+    fetchBooks();
+  };
+
+  const editBook = (book) => {
+    setTitle(book.title);
+    setAuthor(book.author);
+    setGenre(book.genre);
+    setEditingId(book.id);
   };
 
   const deleteBook = async (id) => {
     await axios.delete(`${API}/deleteBook/${id}`);
     fetchBooks();
+  };
+
+  const clearForm = () => {
+    setTitle("");
+    setAuthor("");
+    setGenre("");
+    setEditingId(null);
   };
 
   return (
@@ -83,24 +106,40 @@ function App() {
           onChange={(e) => setGenre(e.target.value)}
         />
 
-        <button className="add-btn" onClick={addBook}>
-          Add Book
-        </button>
+        {editingId ? (
+          <button className="add-btn" onClick={updateBook}>
+            Update Book
+          </button>
+        ) : (
+          <button className="add-btn" onClick={addBook}>
+            Add Book
+          </button>
+        )}
       </div>
 
       <div className="book-list">
-        {filteredBooks.map((book) => (
+        {filteredBooks.map((book, index) => (
           <div key={book.id} className="book-item">
             <span>
-              <b>{book.title}</b> — {book.author} ({book.genre})
+              <b>{index + 1}.</b> <b>{book.title}</b> — {book.author} ({book.genre})
             </span>
 
-            <button
-              className="delete-btn"
-              onClick={() => deleteBook(book.id)}
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                className="add-btn"
+                onClick={() => editBook(book)}
+                style={{ marginRight: 8 }}
+              >
+                Edit
+              </button>
+
+              <button
+                className="delete-btn"
+                onClick={() => deleteBook(book.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
