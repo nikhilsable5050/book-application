@@ -11,7 +11,11 @@ function App() {
   const [search, setSearch] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API = "http://localhost:8080/book/v1";
+  console.log("API URL:", process.env.REACT_APP_API_URL);
+
+const API =
+  process.env.REACT_APP_API_URL ||
+  "http://localhost:8080/book/v1";
 
   useEffect(() => {
     fetchBooks();
