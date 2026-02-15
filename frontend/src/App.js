@@ -14,8 +14,8 @@ function App() {
   console.log("API URL:", process.env.REACT_APP_API_URL);
 
 const API =
-  process.env.REACT_APP_API_URL ||
-  "http://localhost:8080/book/v1";
+  (process.env.REACT_APP_API_URL || "http://localhost:8080") +
+  "/book/v1";
 
   useEffect(() => {
     fetchBooks();
