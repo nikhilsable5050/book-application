@@ -20,31 +20,26 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // Add book
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         return ResponseEntity.ok(bookService.addBook(book));
     }
 
-    // Get all books
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    // Get book by name
-    @GetMapping("/{bookName}")
+    @GetMapping("/name/{bookName}")
     public ResponseEntity<Book> getBookByName(@PathVariable String bookName) {
         return ResponseEntity.ok(bookService.getBookByName(bookName));
     }
 
-    // Update full book
     @PutMapping
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
         return ResponseEntity.ok(bookService.updateBook(book));
     }
 
-    // Partial update
     @PatchMapping("/{id}")
     public ResponseEntity<Book> patchBook(
             @PathVariable Integer id,
@@ -52,7 +47,6 @@ public class BookController {
         return ResponseEntity.ok(bookService.patchBook(id, book));
     }
 
-    // Delete book
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
